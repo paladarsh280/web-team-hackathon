@@ -1,0 +1,53 @@
+services:
+  # 1. Database Service
+  mongo_db:
+    image: mongo:latest
+    container_name: app_database
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - app_network
+
+  # 2. Backend Service
+  backend:  # <--- FIXED: Lined up with mongo_db and frontend
+    build:
+      context: ./backend
+    container_name: app_backend
+    restart: always
+    
+    # Loads your API keys (like Resend)
+    env_file:
+      - ./backend/.env
+    
+    environment:
+      - PORT=5000
+      # This OVERRIDES whatever is in your .env file
+      # forcing it to use the local Docker database
+      - MONGO_URI=mongodb://mongo_db:27017/my_app_db
+    depends_on:
+      - mongo_db
+    networks:
+      - app_network
+
+  # 3. Frontend Service
+  frontend:
+    build:
+      context: .
+    container_name: app_frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
+
+volumes:
+  mongo_data:
