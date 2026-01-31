@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://web-team-hackathon.onrender.com/api",
+  baseURL: "/api",
 });
 
 
