@@ -5,32 +5,28 @@ import Twitter from "../icons/Twitter";
 import Linkedin from "../icons/Linkedin";
 import Instagram from "../icons/Instagram";
 import Reddit from "../icons/Reddit";
-// import logo from "../assets/logo.png";
+
 
 export default function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
     <footer className="w-full bg-white  relative">
-      {/* Main Footer Content */}
+
       <div className="py-2 px-[50px] md:px-[45px]">
         <div className="max-w-7xl mx-auto">
-          {/* Logo and Socials */}
+
           <div className="flex  md:flex-row md:items-center justify-between mb-8 ">
             <div>
-              {/* <img
-                src={logo}
-                alt=" Logo"
-                className="w-50 h-auto"
-              /> */}
+
               <p className="text-sm text-black text-muted-foreground font-bold ">
-             The Legacy of Trust, Sealed for Tomorrow.
+                The Legacy of Trust, Sealed for Tomorrow.
               </p>
             </div>
 
             <div className="flex flex-col items-center gap-8 mt-20">
               <div className="flex gap-4">
-                {[Facebook , Twitter, Linkedin,Reddit,Instagram].map(
+                {[Facebook, Twitter, Linkedin, Reddit, Instagram].map(
                   (Icon, i) => (
                     <a
                       key={i}
@@ -48,7 +44,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Footer Links */}
+
           <nav className="flex flex-wrap gap-6 text-sm border-t pt-6">
             {[
               "Privacy Policy",
@@ -69,7 +65,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Wave Section */}
+
       <div className="relative h-64 overflow-hidden w-full">
         <svg
           viewBox="0 0 1440 320"
@@ -92,8 +88,8 @@ export default function Footer() {
           ></path>
         </svg>
 
-        {/* Copyright and Scroll */}
-        
+
+
       </div>
     </footer>
   );

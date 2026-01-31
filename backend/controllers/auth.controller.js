@@ -3,34 +3,29 @@ import User from "../models/User.model.js";
 import jwt from "jsonwebtoken";
 import { sendOtpEmail } from "../utils/sendEmail.js";
 
-/**
- * 🔐 Generate JWT
- */
+
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: "7d",
   });
 };
 
-/**
- * ✅ SIGNUP + SEND OTP
- * - Allows re-signup for unverified users
- */
+
 export const signup = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
     let user = await User.findOne({ email });
 
-    // ✅ Already verified user
+
     if (user && user.isVerified) {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    // Generate OTP
+
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
-    // ✅ If user exists but NOT verified → resend OTP
+
     if (user && !user.isVerified) {
       user.otp = otp;
       user.otpExpire = Date.now() + 5 * 60 * 1000;
@@ -41,7 +36,7 @@ export const signup = async (req, res) => {
       return res.json({ message: "OTP resent to email" });
     }
 
-    // ✅ New user
+
     user = await User.create({
       name,
       email,
@@ -59,9 +54,7 @@ export const signup = async (req, res) => {
   }
 };
 
-/**
- * ✅ VERIFY OTP
- */
+
 export const verifyOtp = async (req, res) => {
   try {
     const { email, otp } = req.body;
@@ -96,9 +89,7 @@ export const verifyOtp = async (req, res) => {
   }
 };
 
-/**
- * ✅ RESEND OTP
- */
+
 export const resendOtp = async (req, res) => {
   try {
     const { email } = req.body;
@@ -126,9 +117,7 @@ export const resendOtp = async (req, res) => {
   }
 };
 
-/**
- * ✅ LOGIN
- */
+
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;

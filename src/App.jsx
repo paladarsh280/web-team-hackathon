@@ -1,34 +1,57 @@
 
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
 
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
-import Demo from "./pages/demo";
-import Footer from "./components/Footer";
+
+
+import DashboardLayout from "./components/layout/DashboardLayout";
+import DashboardHome from "./pages/dashboard/DashboardHome";
+
 
 import ProtectedRoute from "./routes/ProtectedRoute";
 import PublicRoute from "./routes/PublicRoute";
+import { AuthProvider } from "./context/AuthContext";
 
+import Demo from "./pages/evidence/Demo";
+
+import AddCase from "./pages/cases/AddCase";
+import CaseList from "./pages/cases/CaseList";
+import CaseDetails from "./pages/cases/CaseDetails";
+import CustodyManager from "./pages/evidence/CustodyManager";
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
+      <AuthProvider>
+        <Routes>
 
-        {/* ✅ Public Pages */}
-        <Route element={<PublicRoute />}>
-          <Route path="/" element={<Login />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-        </Route>
+         
+          <Route element={<PublicRoute />}>
+            <Route path="/" element={<Navigate to="/login" />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+          </Route>
 
-        {/* ✅ Protected Pages */}
-        <Route element={<ProtectedRoute />}>
           <Route path="/demo" element={<Demo />} />
-          <Route path="/footer" element={<Footer />} />
-        </Route>
 
-      </Routes>
+         
+          <Route element={<ProtectedRoute />}>
+            <Route path="/dashboard" element={<DashboardLayout />}>
+              <Route index element={<DashboardHome />} />
+              <Route path="add-case" element={<AddCase />} />
+              <Route path="search" element={<CaseList />} />
+              <Route path="cases/:id" element={<CaseDetails />} />
+              <Route path="custody" element={<CustodyManager />} />
+            </Route>
+          </Route>
+
+       
+          <Route path="*" element={<Navigate to="/login" />} />
+
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

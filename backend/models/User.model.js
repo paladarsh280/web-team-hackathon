@@ -39,19 +39,14 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-/**
- * ✅ PASSWORD HASHING — CORRECT ASYNC VERSION
- * ❌ DO NOT USE next() HERE
- */
+
 userSchema.pre("save", async function () {
   if (!this.isModified("password")) return;
 
   this.password = await bcrypt.hash(this.password, 10);
 });
 
-/**
- * ✅ PASSWORD COMPARE
- */
+
 userSchema.methods.matchPassword = async function (enteredPassword) {
   return bcrypt.compare(enteredPassword, this.password);
 };

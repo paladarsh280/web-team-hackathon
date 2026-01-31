@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 export default function Login() {
   const navigate = useNavigate();
-const { saveAuthToken } = useAuth();
+  const { saveAuthToken } = useAuth();
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -52,19 +52,14 @@ const { saveAuthToken } = useAuth();
         return;
       }
 
-      // ✅ Login success
-      // localStorage.removeItem("pendingEmail");
-      // localStorage.setItem("token", data.token);
-      // localStorage.setItem("role", data.role);
 
-      // navigate("/demo");
       localStorage.removeItem("pendingEmail");
-localStorage.setItem("role", data.role);
+      localStorage.setItem("role", data.role);
 
-// update global auth state
-saveAuthToken(data.token);
 
-navigate("/demo");
+      saveAuthToken(data.token);
+
+      navigate("/demo");
 
     } catch {
       alert("Server error. Try again.");

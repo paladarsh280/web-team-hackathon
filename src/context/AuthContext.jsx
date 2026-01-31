@@ -1,27 +1,42 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-export const AuthContext = createContext();
+const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem("token") || null);
+
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
+
+    const storedToken = localStorage.getItem("token");
+    const storedRole = localStorage.getItem("role");
+
+    if (storedToken) {
+      setToken(storedToken);
+      setUser({ role: storedRole });
+    }
+
+
+    setLoading(false);
   }, []);
 
-  const saveAuthToken = (token) => {
-    localStorage.setItem("token", token);
-    setIsLoggedIn(true);
+  const saveAuthToken = (newToken) => {
+    localStorage.setItem("token", newToken);
+    setToken(newToken);
+    setUser({ role: "admin" });
   };
 
   const logout = () => {
     localStorage.removeItem("token");
-    setIsLoggedIn(false);
+    localStorage.removeItem("role");
+    setToken(null);
+    setUser(null);
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, saveAuthToken, logout }}>
+    <AuthContext.Provider value={{ user, token, saveAuthToken, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );

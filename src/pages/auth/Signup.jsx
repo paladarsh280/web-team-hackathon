@@ -17,13 +17,13 @@ export default function Signup() {
     password: "",
   });
 
-  // INPUT HANDLER
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  // STEP 1 — SIGNUP
+
   const handleSignup = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -61,7 +61,7 @@ export default function Signup() {
     }
   };
 
-  // STEP 2 — VERIFY OTP
+
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -94,7 +94,7 @@ export default function Signup() {
     }
   };
 
-  // RESEND OTP
+
   const resendOtp = async () => {
     try {
       await fetch("http://localhost:5000/api/auth/resend-otp", {
@@ -123,7 +123,7 @@ export default function Signup() {
             Create account & verify via OTP
           </p>
 
-          {/* STEP 1 */}
+
           {step === 1 && (
             <form className="space-y-4" onSubmit={handleSignup}>
               <div className="flex gap-3">
@@ -175,7 +175,7 @@ export default function Signup() {
             </form>
           )}
 
-          {/* STEP 2 */}
+
           {step === 2 && (
             <form className="space-y-4" onSubmit={handleVerifyOtp}>
               <input
