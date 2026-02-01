@@ -40,7 +40,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      # 👇 THIS IS THE SECURITY FIX
+      
       - name: Create Backend Env File from Secrets
         run: |
           cd backend
