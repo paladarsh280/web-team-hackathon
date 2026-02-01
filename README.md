@@ -26,7 +26,7 @@ PORT=5000
 JWT_SECRET=your_jwt_secret_here
 
 RESEND_API_KEY=your_resend_api_key_here
-MAIL_FROM="adarsh <send@adarsh28.online>
+MAIL_FROM=adarsh <send@adarsh28.online>
 
 
 
