@@ -1,22 +1,14 @@
 
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-
-
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
-
-
 import DashboardLayout from "./components/layout/DashboardLayout";
 import DashboardHome from "./pages/dashboard/DashboardHome";
-
-
 import ProtectedRoute from "./routes/ProtectedRoute";
 import PublicRoute from "./routes/PublicRoute";
 import { AuthProvider } from "./context/AuthContext";
-
 import Demo from "./pages/evidence/Demo";
-
 import AddCase from "./pages/cases/AddCase";
 import CaseList from "./pages/cases/CaseList";
 import CaseDetails from "./pages/cases/CaseDetails";

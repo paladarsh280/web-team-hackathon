@@ -19,14 +19,14 @@ cd web-team-hackathon
 
 ⚙️ Environment Setup
 
-Create a .env file inside the backend/ folder and add the following variables:
+Create a .env file de the backend/ folder and add the following variables:
 
 MONGO_URI=mongodb://mongo_db:27017/my_app_db
 PORT=5000
 JWT_SECRET=your_jwt_secret_here
 
 RESEND_API_KEY=your_resend_api_key_here
-MAIL_FROM=MAIL_FROM=Adarsh "<"send@adarsh28.online">" (remove all curly braces i)
+MAIL_FROM=MAIL_FROM=Adarsh "<"send@adarsh28.online">" (remove all curly braces )
 
 
 
